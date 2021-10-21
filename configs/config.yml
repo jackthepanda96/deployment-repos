@@ -1,0 +1,8 @@
+port: 8000
+database:
+  driver: "mysql" #possible value are mongodb or mysql
+  address: "alta_mysql"
+  port: 3306
+  username: "root"
+  password: "password"
+  name: "alta_deploy_test"
