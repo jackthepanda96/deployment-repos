@@ -2,6 +2,7 @@ package configs
 
 import (
 	"fmt"
+	"project/empty_deployment/models"
 
 	"github.com/labstack/gommon/log"
 	"gorm.io/driver/mysql"
@@ -31,5 +32,5 @@ func MysqlConnect(config *AppConfig) *gorm.DB {
 
 func DatabaseMigration(db *gorm.DB) {
 	// db.AutoMigrate(models.User{})
-	// db.AutoMigrate(models.Book{})
+	db.AutoMigrate(models.Book{})
 }
