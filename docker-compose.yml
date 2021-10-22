@@ -3,9 +3,12 @@ services:
   db:
     image: mysql
     restart: always
-    environtment: 
-      MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: alta_deploy_test
+    environment: 
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=alta_deploy_test
+      - MYSQL_ROOT_PASSWORD=toor
+    volumes:
+      - database_mysql:/var/lib/mysql
     ports:
       - 3306:3306
 
