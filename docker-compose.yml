@@ -1,24 +1,24 @@
 services:
 
   db:
+    container_name: main_db
     image: mysql
     restart: always
     environment: 
-      - MYSQL_USER=root
       - MYSQL_DATABASE=alta_deploy_test
       - MYSQL_ROOT_PASSWORD=toor
-    volumes:
-      - database_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysql", "-u", "root",  "-ptoor", "-e", "show databases"]
+      interval: 10s
     ports:
       - 3306:3306
 
-  # app:
-  #   build: .
-  #   restart: always
-  #   environment:
-  #     storage: db
-  #   ports:
-  #     8080:8080
-    # depends_on:
-    #   appDb:
-    #     condition: 
+  app:
+    container_name: go-app
+    build: .
+    restart: always
+    ports:
+      8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
