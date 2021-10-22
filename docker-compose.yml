@@ -1,0 +1,21 @@
+services:
+
+  db:
+    image: mysql
+    restart: always
+    environtment: 
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: alta_deploy_test
+    ports:
+      - 3306:3306
+
+  # app:
+  #   build: .
+  #   restart: always
+  #   environment:
+  #     storage: db
+  #   ports:
+  #     8080:8080
+    # depends_on:
+    #   appDb:
+    #     condition: 

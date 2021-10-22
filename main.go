@@ -26,9 +26,9 @@ func main() {
 	routes.RegisterPath(ec, bookController)
 	middlewares.GlobalMiddlewares(ec)
 
-	runServer := fmt.Sprint("localhost: ", config.Port)
+	runServer := fmt.Sprint(":", config.Port)
 
 	if err := ec.Start(runServer); err != nil {
-		log.Info("shutting down the server")
+		log.Info("shutting down the server", err)
 	}
 }

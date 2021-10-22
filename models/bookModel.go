@@ -1,10 +1,14 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"github.com/labstack/gommon/log"
+	"gorm.io/gorm"
+)
 
 type Book struct {
-	Title  string `json:"title" form:"title"`
-	Author string `json:"author" form:"author"`
+	gorm.Model
+	Title  string `json:"title"form:"title"`
+	Author string `json:"author"form:"author"`
 }
 
 type BookDBModel struct {
@@ -22,6 +26,7 @@ type BookModel interface {
 
 func (u *BookDBModel) Insert(newBook Book) (Book, error) {
 	if err := u.db.Save(&newBook).Error; err != nil {
+		log.Debug(err)
 		return newBook, err
 	}
 	return newBook, nil
